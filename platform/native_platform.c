@@ -256,6 +256,12 @@ void Platform_Init(const char *title, int width, int height)
 		return;
 	}
 
+	// Local patch (play-ctr): CTR_FULLSCREEN=1 starts in fullscreen, same as pressing F11.
+	if (SDL_getenv("CTR_FULLSCREEN") != NULL && SDL_getenv("CTR_FULLSCREEN")[0] == '1')
+	{
+		Platform_HandleFullscreenToggle();
+	}
+
 	if (!NativeRenderer_InitialisePSX())
 	{
 		Platform_LogError("[CTR Native] Failed to initialise PSX renderer state\n");
